@@ -41,6 +41,13 @@
       "ativo": true,
       "email": "m@m.com",
       "role": 2
+    },
+    {
+      "id": 7,
+      "nome": "Marcos M. Crocci",
+      "ativo": true,
+      "email": "mmc@gmail.com",
+      "role": 2
     }
   ],
   "roles": [

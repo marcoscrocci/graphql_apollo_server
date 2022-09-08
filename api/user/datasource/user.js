@@ -24,6 +24,34 @@ class UsersAPI extends RESTDataSource {
         return user;
     }
 
+    async addUser(user) {
+        // O código abaixo que na aula é mostrado é desnecessário, pois o json-server já faz automático.
+        //const users = await this.get('/users');
+        //user.id = users.length + 1;
+        const role = await this.get(`/roles?type=${user.role}`);
+        
+        await this.post('/users', {...user, role: role[0].id});
+        return ({
+            ...user,
+            role: role[0]
+        });
+    }
+
+    async updateUser(user) {
+        const role = await this.get(`/roles?type=${user.role}`);
+        
+        await this.put(`/users/${user.id}`, {...user, role: role[0].id});
+        return ({
+            ...user,
+            role: role[0]
+        });
+    }
+
+    async deleteUser(id) {
+        await this.delete(`/users/${id}`);
+        return id;
+    }
+
 }
 
 module.exports = UsersAPI;
