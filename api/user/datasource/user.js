@@ -5,6 +5,10 @@ class UsersAPI extends RESTDataSource {
     constructor() {
         super();
         this.baseURL = 'http://localhost:3000';
+        this.responseCustom = {
+            code: 200,
+            message: 'Operação efetuada com sucesso'
+        };
     }
 
     async getUsers() {
@@ -32,24 +36,42 @@ class UsersAPI extends RESTDataSource {
         
         await this.post('/users', {...user, role: role[0].id});
         return ({
-            ...user,
-            role: role[0]
+            code: 201,
+            message: 'Usuários adicionado com sucesso!',
+            user: {
+                ...user,
+                role: role[0]
+            }
         });
     }
 
-    async updateUser(user) {
-        const role = await this.get(`/roles?type=${user.role}`);
-        
-        await this.put(`/users/${user.id}`, {...user, role: role[0].id});
-        return ({
-            ...user,
-            role: role[0]
-        });
+    async updateUser({ id, user }) {
+        try {
+            const role = await this.get(`/roles?type=${user.role}`);
+            await this.put(`/users/${id}`, {...user, role: role[0].id});
+            return ({
+                ...this.responseCustom,
+                user: {
+                    ...user,
+                    id,
+                    role: role[0]
+                }
+            });
+        } catch (error) {
+            console.log('user =', user);
+            const e = error.message.split(':');
+            return ({ code: e[0], message: e[1].trim() });           
+        }
     }
 
     async deleteUser(id) {
-        await this.delete(`/users/${id}`);
-        return id;
+        try {
+            await this.delete(`/users/${id}`);
+            return ({ code: 200, message: 'Usuário removido com sucesso!' });
+        } catch (error) {
+            const e = error.message.split(':');
+            return ({ code: e[0], message: e[1].trim() });
+        }
     }
 
 }
