@@ -4,19 +4,19 @@
 
 ### Gerar a imagem a partir do Dockerfile e consultar:
 
-docker build -t marcoscrocci/1922-graphql:1.0 .
-docker image ls | grep 1922-graphql
+docker build -t marcoscrocci/graphql_apollo_server:1.0 .
+docker image ls | grep graphql_apollo_server
 
 ### Gerar o container a partir da imagem gerada acima, apontando para porta padrão do GraphQL e consultar:
 
-docker run -d --name graphql_server -v $(pwd):/home/node/app -p 4000:4000 marcoscrocci/1922-graphql:1.0
-docker ps | grep graphql_server
+docker run -d --name graphql_apollo_server -v $(pwd):/home/node/app -p 4000:4000 marcoscrocci/graphql_apollo_server:1.0
+docker ps | grep graphql_apollo_server
 
 ### Se o container já existir, para iniciar:
-docker start graphql_server
+docker start graphql_apollo_server
 
 ### Acessar o terminal do container:
-docker exec -it graphql_server /bin/bash
+docker exec -it graphql_apollo_server /bin/bash
 
 ### No terminal do container executar:
 npm install
