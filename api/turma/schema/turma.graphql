@@ -13,9 +13,39 @@ const turmaSchema = gql `
         createdAt: DateTime!
     }
 
+    input TurmaInput {
+        descricao: String
+        horario: String
+        vagas: Int
+        inicio: DateTime
+        docente_id: Int
+    }
+
     type Query {
         turmas: [Turma]
         turma (id: ID!): Turma
+    }
+
+    type Mutation {
+        addTurma(turma: TurmaInput): Turma!
+        updateTurma(id: ID!, turma: TurmaInput): Turma!
+        deleteTurma(id: ID!): deleteTurmaResponse
+    }
+
+    interface responseCustom {
+        code: Int!
+        message: String!
+    }
+
+    type updateTurmaResponse implements responseCustom {
+        code: Int!
+        message: String!
+        turma: Turma
+    }
+    
+    type deleteTurmaResponse implements responseCustom {
+        code: Int!
+        message: String!
     }
 
 `
