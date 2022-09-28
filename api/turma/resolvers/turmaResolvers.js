@@ -23,6 +23,11 @@ const turmaResolvers = {
             dataSources.turmasAPI.updateTurma(novosDados),
         deleteTurma: (parent, { id }, { dataSources }) =>
             dataSources.turmasAPI.deleteTurma(id)
+    },
+
+    Turma: {
+        matriculas: (parent, args, { dataSources }) => dataSources.matriculasAPI.getMatriculasPorTurma(parent.id),
+        docente: (parent, args, { dataSources }) => dataSources.usersAPI.getUserById(parent.docente_id)
     }
 };
 

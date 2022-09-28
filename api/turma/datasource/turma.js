@@ -3,7 +3,7 @@ const { SQLDataSource } = require("datasource-sql");
 class TurmasAPI extends SQLDataSource {
     constructor(dbConfig) {
         super(dbConfig);
-        this.responseCustom = {
+        this.response = {
             code: 0,
             message: ""
         };
@@ -46,8 +46,8 @@ class TurmasAPI extends SQLDataSource {
     async deleteTurma(id) {
         await this.db("turmas").where({ id: id }).del();
 
-        this.responseCustom.message = "Registro excluído!";
-        return this.responseCustom;
+        this.response.message = "Registro excluído!";
+        return this.response;
     }
 }
 

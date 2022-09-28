@@ -4,14 +4,14 @@ const path = require('path');
 
 const { userSchema, userResolvers, UsersAPI } = require('./user');
 const { turmaSchema, turmaResolvers, TurmasAPI } = require('./turma');
-const { matriculaSchema } = require('./matricula');
+const { matriculaSchema, matriculaResolvers, MatriculasAPI } = require('./matricula');
 
 
 
 const typeDefs = mergeTypeDefs([userSchema, turmaSchema, matriculaSchema]);
 
 // https://cursos.alura.com.br/forum/topico-typeerror-mergetypedefs-is-not-a-function-245972
-const resolvers = [userResolvers, turmaResolvers]
+const resolvers = [userResolvers, turmaResolvers, matriculaResolvers]
 
 const dbConfig = {
     client: 'sqlite3',
@@ -27,7 +27,8 @@ const server = new ApolloServer({
     dataSources: () => {
         return {
             usersAPI: new UsersAPI(),
-            turmasAPI: new TurmasAPI(dbConfig)
+            turmasAPI: new TurmasAPI(dbConfig),
+            matriculasAPI: new MatriculasAPI(dbConfig)
         }
     }
 });

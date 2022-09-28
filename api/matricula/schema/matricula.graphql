@@ -10,6 +10,25 @@ const matriculaSchema = gql `
         createdAt: DateTime!
         status: String!
     }
+
+    type Mutation {
+        matricularEstudante(estudante: ID!, turma: ID!): updateMatriculaResponse!
+    }
+
+    interface customResponse {
+        code: Int!
+        message: String!
+    }
+
+    type updateMatriculaResponse implements customResponse {
+        code: Int!
+        message: String!
+    }
+    
+    type deleteMatriculaResponse implements customResponse {
+        code: Int!
+        message: String!
+    }    
 `
 
 module.exports = matriculaSchema;

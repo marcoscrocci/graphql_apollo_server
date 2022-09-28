@@ -33,18 +33,18 @@ const turmaSchema = gql `
         deleteTurma(id: ID!): deleteTurmaResponse
     }
 
-    interface responseCustom {
+    interface customResponse {
         code: Int!
         message: String!
     }
 
-    type updateTurmaResponse implements responseCustom {
+    type updateTurmaResponse implements customResponse {
         code: Int!
         message: String!
         turma: Turma
     }
     
-    type deleteTurmaResponse implements responseCustom {
+    type deleteTurmaResponse implements customResponse {
         code: Int!
         message: String!
     }
