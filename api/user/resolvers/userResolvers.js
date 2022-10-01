@@ -23,6 +23,9 @@ const userResolvers = {
         addUser: async (parent, { user }, { dataSources }) => dataSources.usersAPI.addUser(user),
         updateUser: async (parent, user, { dataSources }) => dataSources.usersAPI.updateUser(user),
         deleteUser: async (parent, { id }, { dataSources }) => dataSources.usersAPI.deleteUser(id)
+    },
+    User: {
+        matriculas: (parent, _, { dataSources }) => dataSources.matriculasAPI.getMatriculasPorEstudante(parent.id)
     }
 }
 
