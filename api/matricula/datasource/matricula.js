@@ -29,7 +29,7 @@ class MatriculasAPI extends SQLDataSource {
         const matriculas = await this.db
             .select('*')
             .from('matriculas')
-            .where({ turma_id: idTurma })
+            .where({ turma_id: Number(idTurma) })
         
         return matriculas;
     }
@@ -38,9 +38,23 @@ class MatriculasAPI extends SQLDataSource {
         const matriculas = await this.db
            .select('*')
            .from('matriculas')
-           .where({ estudante_id: idEstudante })
+           .where({ estudante_id: Number(idEstudante) })
         
         return matriculas;
+    }
+
+    async excluirMatricula(idMatricula) {
+        await this.db('matriculas').where({ id: Number(idMatricula) }).del();
+        return { code: 200, message: 'Matrícula excluída com sucesso!' }
+    }
+
+    async cancelarMatricula(idMatricula) {
+        await this.db
+            .update({ status: 'cancelado' })
+            .where({ id: Number(idMatricula) })
+            .into('matriculas');
+
+        return { code: 200, message: 'Matrícula cancelada com sucesso!' }
     }
 }
 

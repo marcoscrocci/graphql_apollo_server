@@ -13,6 +13,8 @@ const matriculaSchema = gql `
 
     type Mutation {
         matricularEstudante(estudante: ID!, turma: ID!): updateMatriculaResponse!
+        excluirMatricula(matricula: ID!): deleteMatriculaResponse!
+        cancelarMatricula(matricula: ID!): updateMatriculaResponse!
     }
 
     interface customResponse {
