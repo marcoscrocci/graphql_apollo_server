@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx json-server --watch api/data/dados.json & nodemon -e js,graphql ./api/index.js",
+    "start": "npx json-server --watch api/data/dados.json & DEBUG=knex:query nodemon -e js,graphql ./api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "apollo-datasource-rest": "^3.7.0",
     "apollo-server": "^3.10.2",
+    "dataloader": "^2.1.0",
     "datasource-sql": "^2.0.1",
     "express": "^4.18.1",
     "graphql": "^16.6.0",
